@@ -8,17 +8,16 @@ volumes:
 
 services:
   nginxproxy:
-    image: jwilder/nginx-proxy
+    image: nginxproxy/nginx-proxy:0.8.0
     container_name: nginxproxy_local
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - local_nginx_conf:/etc/nginx/conf.d
-      - local_nginx_vhost:/etc/nginx/vhost.d
       - local_nginx_certs:/etc/nginx/certs
+      - local_nginx_vhost:/etc/nginx/vhost.d
       - local_nginx_html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
       - nginxproxy_local_network
 
