@@ -1,7 +1,6 @@
 version: "2"
 
 volumes:
-  production_nginx_conf: {}
   production_nginx_vhost: {}
   production_nginx_html: {}
   production_nginx_certs: {}
