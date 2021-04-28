@@ -8,7 +8,10 @@ volumes:
 
 services:
   nginxproxy:
-    image: nginxproxy/nginx-proxy:0.8.0
+    build:
+      context: .
+      dockerfile: ./compose/production/Dockerfile
+    image: nginxproxy_production
     container_name: nginxproxy_production
     ports:
       - "80:80"
