@@ -16,7 +16,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./compose/custom_proxy.conf:/etc/nginx/conf.d/custom_proxy.conf:ro
+      - ./nginxproxy/custom_proxy.conf:/etc/nginx/conf.d/custom_proxy.conf
       - local_nginx_certs:/etc/nginx/certs
       - local_nginx_vhost:/etc/nginx/vhost.d
       - local_nginx_html:/usr/share/nginx/html
