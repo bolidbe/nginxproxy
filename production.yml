@@ -11,8 +11,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/Dockerfile
-    image: nginxproxy_nginxproxy_production
-    container_name: nginxproxy_nginxproxy_production
+    image: nginxproxy_production_nginxproxy
+    container_name: nginxproxy_production_nginxproxy
     ports:
       - "80:80"
       - "443:443"
@@ -26,7 +26,7 @@ services:
 
   sslgenerator:
     image: nginxproxy/acme-companion:2.1.0
-    container_name: nginxproxy_acmecompanion_production
+    container_name: nginxproxy_production_acmecompanion
     volumes_from:
       - nginxproxy
     volumes:
