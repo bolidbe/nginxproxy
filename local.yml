@@ -10,8 +10,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/Dockerfile
-    image: nginxproxy_local
-    container_name: nginxproxy_local
+    image: nginxproxy_nginxproxy_local
+    container_name: nginxproxy_nginxproxy_local
     ports:
       - "80:80"
       - "443:443"
