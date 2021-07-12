@@ -4,6 +4,7 @@ volumes:
   local_nginx_vhost: {}
   local_nginx_html: {}
   local_nginx_certs: {}
+  local_nginx_logs: {}
 
 services:
   nginxproxy:
@@ -17,6 +18,7 @@ services:
       - "443:443"
     volumes:
       - ./nginxproxy/custom_proxy.conf:/etc/nginx/conf.d/custom_proxy.conf
+      - local_nginx_logs:/var/log/nginx/
       - local_nginx_certs:/etc/nginx/certs
       - local_nginx_vhost:/etc/nginx/vhost.d
       - local_nginx_html:/usr/share/nginx/html

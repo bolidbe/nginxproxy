@@ -5,6 +5,7 @@ volumes:
   production_nginx_html: {}
   production_nginx_certs: {}
   production_nginx_acme: {}
+  production_nginx_logs: {}
 
 services:
   nginxproxy:
@@ -17,6 +18,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - production_nginx_logs:/var/log/nginx/
       - production_nginx_certs:/etc/nginx/certs
       - production_nginx_vhost:/etc/nginx/vhost.d
       - production_nginx_html:/usr/share/nginx/html
