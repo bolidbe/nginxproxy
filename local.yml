@@ -4,7 +4,7 @@ volumes:
   local_nginx_vhost: {}
   local_nginx_html: {}
   local_nginx_certs: {}
-  local_nginx_logs: {}
+  # local_nginx_logs: {}
 
 services:
   nginxproxy:
