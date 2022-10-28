@@ -1,31 +1,35 @@
 version: "2"
 
 volumes:
-  local_nginx_vhost: {}
-  local_nginx_html: {}
-  local_nginx_certs: {}
-  # local_nginx_logs: {}
+  bolid_nginxproxy_local_nginx_vhost:
+    name: bolid_nginxproxy_local_nginx_vhost
+  bolid_nginxproxy_local_nginx_html:
+    name: bolid_nginxproxy_local_nginx_html
+  bolid_nginxproxy_local_nginx_certs:
+    name: bolid_nginxproxy_local_nginx_certs
+  # bolid_nginxproxy_local_nginx_logs:
+  #   name: bolid_nginxproxy_local_nginx_logs
 
 services:
-  nginxproxy:
+  nginx:
     build:
       context: .
       dockerfile: ./compose/local/Dockerfile
-    image: nginxproxy_local_nginxproxy
-    container_name: nginxproxy_local_nginxproxy
+    image: bolid_nginxproxy_local_nginxproxy
+    container_name: bolid_nginxproxy_local_nginxproxy
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginxproxy/custom_proxy.conf:/etc/nginx/conf.d/custom_proxy.conf
-      # - local_nginx_logs:/var/log/nginx
-      - local_nginx_certs:/etc/nginx/certs
-      - local_nginx_vhost:/etc/nginx/vhost.d
-      - local_nginx_html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - bolid_nginxproxy_local_nginx_certs:/etc/nginx/certs
+      - bolid_nginxproxy_local_nginx_vhost:/etc/nginx/vhost.d
+      - bolid_nginxproxy_local_nginx_html:/usr/share/nginx/html
+      # - bolid_nginxproxy_local_nginx_logs:/var/log/nginx
+      - ./nginxproxy/custom_proxy.conf:/etc/nginx/conf.d/custom_proxy.conf
     networks:
-      - nginxproxy_local_network
+      - bolid_nginxproxy_local_network
 
 networks:
-  nginxproxy_local_network:
-    name: nginxproxy_local_network
+  bolid_nginxproxy_local_network:
+    name: bolid_nginxproxy_local_network

@@ -1,42 +1,47 @@
 version: "2"
 
 volumes:
-  production_nginx_vhost: {}
-  production_nginx_html: {}
-  production_nginx_certs: {}
-  production_nginx_acme: {}
-  production_nginx_logs: {}
+  bolid_nginxproxy_production_nginx_vhost:
+    name: bolid_nginxproxy_production_nginx_vhost
+  bolid_nginxproxy_production_nginx_html:
+    name: bolid_nginxproxy_production_nginx_vhost
+  bolid_nginxproxy_production_nginx_certs:
+    name: bolid_nginxproxy_production_nginx_certs
+  bolid_nginxproxy_production_ssl_acme:
+    name: bolid_nginxproxy_production_ssl_acme
+  # bolid_nginxproxy_production_nginx_logs:
+  #   name: bolid_nginxproxy_production_nginx_logs
 
 services:
-  nginxproxy:
+  nginx:
     build:
       context: .
       dockerfile: ./compose/production/Dockerfile
-    image: nginxproxy_production_nginxproxy
-    container_name: nginxproxy_production_nginxproxy
+    image: bolid_nginxproxy_production_nginxproxy
+    container_name: bolid_nginxproxy_production_nginxproxy
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - production_nginx_logs:/var/log/nginx/
-      - production_nginx_certs:/etc/nginx/certs
-      - production_nginx_vhost:/etc/nginx/vhost.d
-      - production_nginx_html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - bolid_nginxproxy_production_nginx_certs:/etc/nginx/certs
+      - bolid_nginxproxy_production_nginx_vhost:/etc/nginx/vhost.d
+      - bolid_nginxproxy_production_nginx_html:/usr/share/nginx/html
+      # - bolid_nginxproxy_production_nginx_logs:/var/log/nginx/
     networks:
-      - nginxproxy_production_network
+      - bolid_nginxproxy_production_network
 
-  sslgenerator:
+  ssl:
     image: nginxproxy/acme-companion:2.1.0
-    container_name: nginxproxy_production_acmecompanion
+    container_name: bolid_nginxproxy_production_acmecompanion
     volumes_from:
-      - nginxproxy
+      - nginx
     volumes:
-      - production_nginx_acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - bolid_nginxproxy_production_ssl_acme:/etc/acme.sh
     networks:
-      - nginxproxy_production_network
+      - bolid_nginxproxy_production_network
 
 networks:
-  nginxproxy_production_network:
-    name: nginxproxy_production_network
+  bolid_nginxproxy_production_network:
+    name: bolid_nginxproxy_production_network
