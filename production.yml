@@ -17,8 +17,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/Dockerfile
-    image: bolid_nginxproxy_production_nginxproxy
-    container_name: bolid_nginxproxy_production_nginxproxy
+    image: bolid_nginxproxy_production_nginx
+    container_name: bolid_nginxproxy_production_nginx
     ports:
       - "80:80"
       - "443:443"
@@ -33,7 +33,7 @@ services:
 
   ssl:
     image: nginxproxy/acme-companion:2.1.0
-    container_name: bolid_nginxproxy_production_acmecompanion
+    container_name: bolid_nginxproxy_production_ssl
     volumes_from:
       - nginx
     volumes:

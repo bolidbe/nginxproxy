@@ -15,8 +15,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/Dockerfile
-    image: bolid_nginxproxy_local_nginxproxy
-    container_name: bolid_nginxproxy_local_nginxproxy
+    image: bolid_nginxproxy_local_nginx
+    container_name: bolid_nginxproxy_local_nginx
     ports:
       - "80:80"
       - "443:443"
