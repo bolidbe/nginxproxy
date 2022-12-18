@@ -4,7 +4,7 @@ volumes:
   bolid_nginxproxy_production_nginx_vhost:
     name: bolid_nginxproxy_production_nginx_vhost
   bolid_nginxproxy_production_nginx_html:
-    name: bolid_nginxproxy_production_nginx_vhost
+    name: bolid_nginxproxy_production_nginx_html
   bolid_nginxproxy_production_nginx_certs:
     name: bolid_nginxproxy_production_nginx_certs
   bolid_nginxproxy_production_ssl_acme:
